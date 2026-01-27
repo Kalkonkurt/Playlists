@@ -1,0 +1,16 @@
+const express = require('express')
+const app = express()
+require('dotenv').config()
+
+const port = process.env.PORT
+
+const playlistsRoutes = require('./routes/playlists.routes')
+app.use('/api/playlists', playlistsRoutes)
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`)
+})
