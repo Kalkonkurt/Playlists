@@ -5,12 +5,8 @@ const getPlaylistsController = async (req, res) => {
     res.json(playlists)
 }
 
-// const getPlaylistsByIdController = async (rq, res) => {
-//     const playlistId = parseInt(req.params.id, 10)
-//     const playlists = {}
-// }
-
 module.exports = {
     getPlaylistsController
-    // getPlaylistsByIdController
 }
+
+module.exports = { getPlaylistsController }
