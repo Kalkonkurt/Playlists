@@ -1,6 +1,7 @@
 const {
     getPlaylists,
-    getPlaylistsById
+    getPlaylistsById,
+    createPlaylists
 } = require('../services/playlists.services')
 
 const getPlaylistsController = async (req, res) => {
@@ -24,7 +25,22 @@ const getPlaylistsByIdController = async (req, res) => {
     }
 }
 
+const createPlaylistsController = async (req, res) => {
+    try {
+        const newPlaylist = await createPlaylists(req.body)
+
+        if (!newPlaylist) {
+            return res.status(400).json({ message: 'Playlist not created' })
+        }
+
+        res.status(201).json(newPlaylist)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
     getPlaylistsController,
-    getPlaylistsByIdController
+    getPlaylistsByIdController,
+    createPlaylistsController
 }
