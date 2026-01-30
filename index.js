@@ -4,11 +4,6 @@ require('dotenv').config()
 
 const port = process.env.PORT
 
-app.use((req, res, next) => {
-    console.log('INCOMING:', req.method, req.url)
-    next()
-})
-
 const playlistsRoutes = require('./routes/playlists.routes')
 app.use('/api/playlists', playlistsRoutes)
 

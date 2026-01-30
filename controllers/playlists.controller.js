@@ -1,4 +1,7 @@
-const { getPlaylists } = require('../services/playlists.services')
+const {
+    getPlaylists,
+    getPlaylistsById
+} = require('../services/playlists.services')
 
 const getPlaylistsController = async (req, res) => {
     try {
@@ -10,6 +13,18 @@ const getPlaylistsController = async (req, res) => {
     }
 }
 
+const getPlaylistsByIdController = async (req, res) => {
+    const { id } = req.params
+
+    const playlists = await getPlaylistsById(id)
+    if (playlists) {
+        res.json(playlists)
+    } else {
+        res.status(404).json({ message: 'playlists not found' })
+    }
+}
+
 module.exports = {
-    getPlaylistsController
+    getPlaylistsController,
+    getPlaylistsByIdController
 }
