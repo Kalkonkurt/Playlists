@@ -1,6 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const playlistsController = require('../controllers/playlists.controller')
+const {
+    getPlaylistsController
+} = require('../controllers/playlists.controller')
+
+router.get('/', getPlaylistsController)
 
 module.exports = router

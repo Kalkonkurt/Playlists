@@ -1,9 +1,9 @@
-const connectionMYSQL = require('../connection')
+const connectionMySQL = require('../connection')
 
 const getPlaylists = async () => {
     return new Promise((resolve, reject) => {
         let sql = 'SELECT * FROM playlists'
-        connectionMYSQL.query(sql, (err, rows) => {
+        connectionMySQL.query(sql, (err, rows) => {
             if (err) reject(err)
             else resolve(rows)
         })
