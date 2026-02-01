@@ -5,6 +5,13 @@ const playlistsController = require('../controllers/playlists.controller')
 
 router.post('/', playlistsController.createPlaylistsController)
 router.get('/', playlistsController.getPlaylistsController)
-router.get('/:id', playlistsController.getPlaylistsByIdController)
+router.get(
+    '/public-playlists',
+    playlistsController.countPublicPlaylistsController
+)
 
+// Dynamic routes
+router.put('/:playlist_id', playlistsController.updatePlaylistsByIdController)
+router.delete('/:id', playlistsController.deletePlaylistByIdController)
+router.get('/:id', playlistsController.getPlaylistsByIdController)
 module.exports = router
