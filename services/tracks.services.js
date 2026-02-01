@@ -1,5 +1,6 @@
 const connectionMySQL = require('../connection')
-// FIND ALL
+
+// FIND ALL TRACKS
 const getTracks = async () => {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM tracks'
@@ -12,7 +13,8 @@ const getTracks = async () => {
         })
     })
 }
-// Find by ID
+
+// FIND TRACKS BY ID
 const getTracksById = async (id) => {
     return new Promise((resolve, reject) => {
         let sql = 'SELECT * FROM tracks WHERE id=?'
@@ -23,7 +25,7 @@ const getTracksById = async (id) => {
     })
 }
 
-// CREATE
+// CREATE A NEW TRACK
 const createTracks = async (tracksData) => {
     return new Promise((resolve, reject) => {
         let sql =
@@ -46,7 +48,8 @@ const createTracks = async (tracksData) => {
         )
     })
 }
-// DELETE
+
+// DELETE A TRACK BY ID
 const deleteTracksById = async (id) => {
     return new Promise((resolve, reject) => {
         let sql = 'DELETE FROM tracks WHERE id=?'
@@ -60,7 +63,7 @@ const deleteTracksById = async (id) => {
     })
 }
 
-// UPDATE
+// UPDATE A TRACK
 const updateTracksById = async (id, title, artist, duration_seconds) => {
     return new Promise((resolve, reject) => {
         let sql =
@@ -78,8 +81,6 @@ const updateTracksById = async (id, title, artist, duration_seconds) => {
         )
     })
 }
-
-// JOIN show playlists name with tracks title
 
 module.exports = {
     getTracks,

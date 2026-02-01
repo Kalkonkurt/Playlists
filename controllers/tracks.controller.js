@@ -4,9 +4,9 @@ const {
     createTracks,
     deleteTracksById,
     updateTracksById
-    // countPublicTracks
 } = require('../services/tracks.services')
-// GET ALL
+
+// GET ALL TRACKS
 const getTracksController = async (req, res) => {
     try {
         const tracks = await getTracks()
@@ -16,8 +16,8 @@ const getTracksController = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch tracks' })
     }
 }
-// GET BY ID
 
+// GET TRACKS BY ID
 const getTracksByIdController = async (req, res) => {
     const { id } = req.params
 
@@ -28,7 +28,8 @@ const getTracksByIdController = async (req, res) => {
         res.status(404).json({ message: 'Tracks not found' })
     }
 }
-// CREATE
+
+// CREATE A NEW TRACK
 const createTracksController = async (req, res) => {
     try {
         const newTrack = await createTracks(req.body)
@@ -42,7 +43,8 @@ const createTracksController = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-//DELETE
+
+//DELETE TRACKS BY ID
 const deleteTracksByIdController = async (req, res) => {
     const { id } = req.params
     const deletedTrack = await deleteTracksById(id)
@@ -52,7 +54,8 @@ const deleteTracksByIdController = async (req, res) => {
         res.status(404).json({ message: 'Track not found' })
     }
 }
-//UPDATE
+
+//UPDATE TRACKS
 const updateTracksByIdController = async (req, res) => {
     const { id } = req.params
     const { title } = req.body
@@ -75,7 +78,6 @@ const updateTracksByIdController = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-// JOIN show playlists name with tracks title
 
 module.exports = {
     getTracksController,

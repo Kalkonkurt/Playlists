@@ -1,4 +1,5 @@
 const connectionMySQL = require('../connection')
+
 // FIND ALL
 const getPlaylists = async () => {
     return new Promise((resolve, reject) => {
@@ -12,6 +13,7 @@ const getPlaylists = async () => {
         })
     })
 }
+
 // Find by ID
 const getPlaylistsById = async (playlist_id) => {
     return new Promise((resolve, reject) => {
@@ -47,6 +49,7 @@ const createPlaylists = async (playlistData) => {
         )
     })
 }
+
 // DELETE
 const deletePlaylistsById = async (playlist_id) => {
     return new Promise((resolve, reject) => {
@@ -101,8 +104,8 @@ const countPublicPlaylists = async () => {
         })
     })
 }
-// JOIN
 
+// JOIN
 const getPlaylistTracks = async (name) => {
     return new Promise((resolve, reject) => {
         let sql =

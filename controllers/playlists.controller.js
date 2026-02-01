@@ -18,8 +18,8 @@ const getPlaylistsController = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch playlists' })
     }
 }
-// GET PLAYLIST BY ID
 
+// GET PLAYLIST BY ID
 const getPlaylistsByIdController = async (req, res) => {
     const { id } = req.params
 
@@ -30,6 +30,7 @@ const getPlaylistsByIdController = async (req, res) => {
         res.status(404).json({ message: 'playlists not found' })
     }
 }
+
 // CREATE A NEW PLAYLIST
 const createPlaylistsController = async (req, res) => {
     try {
@@ -44,6 +45,7 @@ const createPlaylistsController = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
 //DELETE A PLAYLIST
 const deletePlaylistByIdController = async (req, res) => {
     const { id } = req.params
@@ -54,6 +56,7 @@ const deletePlaylistByIdController = async (req, res) => {
         res.status(404).json({ message: 'Playlist not found' })
     }
 }
+
 //UPDATE A PLAYLIST
 const updatePlaylistsByIdController = async (req, res) => {
     const { playlist_id } = req.params
@@ -81,8 +84,8 @@ const updatePlaylistsByIdController = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-// STATISTIC - COUNT PUBLIC PLAYLISTS
 
+// STATISTIC - COUNT PUBLIC PLAYLISTS
 const countPublicPlaylistsController = async (req, res) => {
     try {
         const stats = await countPublicPlaylists()
