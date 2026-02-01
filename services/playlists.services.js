@@ -91,13 +91,25 @@ const updatePlaylistsById = async (
 const countPublicPlaylists = async () => {
     return new Promise((resolve, reject) => {
         const sql =
-            'SELECT COUNT(*) AS publicPlaylists FROM playlists WHERE is_public = TRUE'
+            'SELECT COUNT(*) AS publicPlaylists FROM playlists WHERE is_public = 1'
         connectionMySQL.query(sql, (err, rows) => {
             if (err) {
                 reject(err)
             } else {
                 resolve(rows[0])
             }
+        })
+    })
+}
+// JOIN
+
+const getPlaylistTracks = async (name) => {
+    return new Promise((resolve, reject) => {
+        let sql =
+            'SELECT playlists.name, JSON_ARRAYAGG(tracks.title) AS tracks FROM playlists JOIN tracks ON playlists.playlist_id = tracks.playlist_id WHERE playlists.name = ? GROUP BY playlists.playlist_id, playlists.name;'
+        connectionMySQL.query(sql, [name], (err, rows) => {
+            if (err) reject(err)
+            else resolve(rows)
         })
     })
 }
@@ -108,5 +120,6 @@ module.exports = {
     createPlaylists,
     deletePlaylistsById,
     updatePlaylistsById,
-    countPublicPlaylists
+    countPublicPlaylists,
+    getPlaylistTracks
 }

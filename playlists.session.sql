@@ -79,3 +79,11 @@ SELECT playlists.playlist_id,
     tracks.duration_seconds
 FROM playlists
     JOIN tracks ON playlists.playlist_id = tracks.playlist_id;
+--@block
+SELECT playlists.name,
+    JSON_ARRAYAGG(tracks.title) AS tracks
+FROM playlists
+    JOIN tracks ON playlists.playlist_id = tracks.playlist_id
+WHERE playlists.name = 'Gym Motivation'
+GROUP BY playlists.playlist_id,
+    playlists.name;

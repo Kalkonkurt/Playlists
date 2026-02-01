@@ -4,9 +4,11 @@ const {
     createPlaylists,
     deletePlaylistsById,
     updatePlaylistsById,
-    countPublicPlaylists
+    countPublicPlaylists,
+    getPlaylistTracks
 } = require('../services/playlists.services')
-// GET ALL
+
+// GET ALL PLAYLISTS
 const getPlaylistsController = async (req, res) => {
     try {
         const playlists = await getPlaylists()
@@ -16,7 +18,7 @@ const getPlaylistsController = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch playlists' })
     }
 }
-// GET BY ID
+// GET PLAYLIST BY ID
 
 const getPlaylistsByIdController = async (req, res) => {
     const { id } = req.params
@@ -28,7 +30,7 @@ const getPlaylistsByIdController = async (req, res) => {
         res.status(404).json({ message: 'playlists not found' })
     }
 }
-// CREATE
+// CREATE A NEW PLAYLIST
 const createPlaylistsController = async (req, res) => {
     try {
         const newPlaylist = await createPlaylists(req.body)
@@ -42,7 +44,7 @@ const createPlaylistsController = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-//DELETE
+//DELETE A PLAYLIST
 const deletePlaylistByIdController = async (req, res) => {
     const { id } = req.params
     const deletedPlaylist = await deletePlaylistsById(id)
@@ -52,7 +54,7 @@ const deletePlaylistByIdController = async (req, res) => {
         res.status(404).json({ message: 'Playlist not found' })
     }
 }
-//UPDATE
+//UPDATE A PLAYLIST
 const updatePlaylistsByIdController = async (req, res) => {
     const { playlist_id } = req.params
     const { name } = req.body
@@ -79,7 +81,7 @@ const updatePlaylistsByIdController = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-// STATISTIC
+// STATISTIC - COUNT PUBLIC PLAYLISTS
 
 const countPublicPlaylistsController = async (req, res) => {
     try {
@@ -91,11 +93,24 @@ const countPublicPlaylistsController = async (req, res) => {
     }
 }
 
+// JOIN
+const getPlaylistTracksController = async (req, res) => {
+    const { name } = req.params
+
+    const playlists = await getPlaylistTracks(name)
+    if (playlists) {
+        res.json(playlists)
+    } else {
+        res.status(404).json({ message: 'Playlist tracks not found' })
+    }
+}
+
 module.exports = {
     getPlaylistsController,
     getPlaylistsByIdController,
     createPlaylistsController,
     deletePlaylistByIdController,
     updatePlaylistsByIdController,
-    countPublicPlaylistsController
+    countPublicPlaylistsController,
+    getPlaylistTracksController
 }
